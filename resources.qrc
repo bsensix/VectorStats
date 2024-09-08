@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/plugins/Stats" >
+        <file>icon.png</file>
+    </qresource>
+</RCC>
