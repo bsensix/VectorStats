@@ -5,14 +5,15 @@
 [general]
 name=VectorStats
 qgisMinimumVersion=3.0
-description=Plugin para análise descritiva e estatística de arquivos vetoriais, com geração de gráficos e medidas estatísticas.
+description=Plugin for descriptive and statistical analysis of vectors, with chart generation
+version=1.0
 author=Breno Nunes
 email=breno_1697@hotmail.com
 
-about= Plugin para facilitar a análise estatística de arquivos vetoriais.
+about=Plugin for descriptive and statistical analysis of vectors, with chart generation
 
 tracker=http://bugs
-repository=https://github.com/bsensix/VectorStats
+repository=http://repo
 # End of mandatory metadata
 
 # Recommended items:

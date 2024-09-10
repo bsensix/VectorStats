@@ -24,6 +24,7 @@
 import os
 import os.path
 from collections import defaultdict
+from datetime import datetime
 
 import matplotlib.dates as mdates
 import matplotlib.pyplot as plt
@@ -503,18 +504,31 @@ class VectorStats:
             == "Série Histórica (eixo X= Data; eixo Y= Numérico, métrica = Média)"
         ):
             # Convert x_values ​​(QDate) to strings
-            date_strings = [date.toString("yyyy-MM-dd") for date in values_x]
+            def parse_date(date_str):
+                for fmt in ("%Y-%m-%d", "%d-%m-%Y"):
+                    try:
+                        return datetime.strptime(date_str, fmt)
+                    except ValueError:
+                        continue
+                raise ValueError(f"Date format for {date_str} is not supported")
 
-            # Create a DataFrame with the data
-            df = pd.DataFrame({"date": date_strings, "value": values_y})
+            # Filtrar valores nulos e converter datas válidas
+            date_strings = [
+                parse_date(date.toString("yyyy-MM-dd")).strftime("%d-%m-%Y")
+                for date in values_x
+                if date is not None and date.isValid()
+            ]
 
-            # Convert date column to datetime type
-            df["date"] = pd.to_datetime(df["date"])
+            values_y_filtered = [
+                value
+                for date, value in zip(values_x, values_y)
+                if date is not None and date.isValid()
+            ]
 
-            # Group by day and calculate the average
+            df = pd.DataFrame({"date": date_strings, "value": values_y_filtered})
+            df["date"] = pd.to_datetime(df["date"], format="%d-%m-%Y")
+
             df_mean = df.groupby("date").mean().reset_index()
-
-            # Convert dates to Matplotlib numeric format
             dates = mdates.date2num(df_mean["date"].to_list())
             y_mean_values = df_mean["value"].to_list()
 
@@ -544,15 +558,28 @@ class VectorStats:
             == "Série Histórica (eixo X= Data; eixo Y= Numérico, métrica = Soma)"
         ):
             # Convert x_values ​​(QDate) to strings
-            date_strings = [date.toString("yyyy-MM-dd") for date in values_x]
+            def parse_date(date_str):
+                for fmt in ("%Y-%m-%d", "%d-%m-%Y"):
+                    try:
+                        return datetime.strptime(date_str, fmt)
+                    except ValueError:
+                        continue
+                raise ValueError(f"Date format for {date_str} is not supported")
 
-            # Create a DataFrame with the data
-            df = pd.DataFrame({"date": date_strings, "value": values_y})
+            date_strings = [
+                parse_date(date.toString("yyyy-MM-dd")).strftime("%d-%m-%Y")
+                for date in values_x
+                if date is not None and date.isValid()
+            ]
 
-            # Convert date column to datetime type
-            df["date"] = pd.to_datetime(df["date"])
+            values_y_filtered = [
+                value
+                for date, value in zip(values_x, values_y)
+                if date is not None and date.isValid()
+            ]
 
-            # Group by day and calculate the sum
+            df = pd.DataFrame({"date": date_strings, "value": values_y_filtered})
+            df["date"] = pd.to_datetime(df["date"], format="%d-%m-%Y")
             df_sum = df.groupby("date").sum().reset_index()
 
             # Convert dates to Matplotlib numeric format
