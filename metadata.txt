@@ -12,8 +12,8 @@ email=breno_1697@hotmail.com
 
 about=Plugin for descriptive and statistical analysis of vectors, with chart generation
 
-tracker=http://bugs
-repository=http://repo
+tracker=https://github.com/bsensix/VectorStats/issues
+repository=https://github.com/bsensix/VectorStats
 # End of mandatory metadata
 
 # Recommended items:
@@ -25,7 +25,7 @@ hasProcessingProvider=no
 # Tags are comma separated with spaces allowed
 tags=statistics
 
-homepage=http://homepage
+homepage=https://github.com/bsensix/VectorStats
 category=Plugins
 icon=icon.png
 # experimental flag
