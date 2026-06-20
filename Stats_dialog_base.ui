@@ -32,9 +32,9 @@
    <property name="currentIndex">
     <number>0</number>
    </property>
-   <widget class="QWidget" name="tab1">
+   <widget class="QWidget" name="tabDashboard">
     <attribute name="title">
-     <string>📊 Medidas Estatísticas</string>
+     <string>Dashboard</string>
     </attribute>
     <widget class="QComboBox" name="attributes">
      <property name="geometry">
@@ -144,9 +144,9 @@
      </property>
     </widget>
    </widget>
-   <widget class="QWidget" name="tab2">
+   <widget class="QWidget" name="tabAgent">
     <attribute name="title">
-     <string>📈 Análise Gráfica</string>
+     <string>Agent</string>
     </attribute>
     <widget class="QComboBox" name="layer_3">
      <property name="geometry">
@@ -308,6 +308,35 @@
      </property>
      <property name="text">
       <string>Salvar gráfico</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="apiKeySetupButton">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>151</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Configurar API Key</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="askAgentButton">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>170</x>
+       <y>20</y>
+       <width>151</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Pedir Insight</string>
      </property>
     </widget>
    </widget>

@@ -41,6 +41,8 @@ from scipy.stats import linregress, mode
 # Initialize Qt resources from file resources.py
 from .resources import *
 
+from .vectorstats_v2.ui.agent_controller import AgentController
+
 # Import the code for the dialog
 from .Stats_dialog import VectorStatsDialog
 
@@ -82,6 +84,7 @@ class VectorStats:
         # Initialize figures and canvas as None
         self.fig = None
         self.canvas = None
+        self.agent_controller = AgentController(session_state={})
 
     # noinspection PyMethodMayBeStatic
     def tr(self, message):
@@ -698,6 +701,34 @@ class VectorStats:
                 f"carregaAtributosX: {self.carregaAtributosX}, carregaAtributosY: {self.carregaAtributosY}"
             )
 
+    def _on_setup_api_key_clicked(self):
+        api_key = os.environ.get("OPENAI_API_KEY", "")
+        is_valid = self.agent_controller.validate_api_key(api_key)
+        self.dlg.askAgentButton.setEnabled(is_valid)
+
+        if not is_valid:
+            self.iface.messageBar().pushMessage(
+                "Erro",
+                "AI_401_KEY_INVALID: Atualize a chave da OpenAI e valide novamente.",
+                level=2,
+            )
+            return
+
+        self.iface.messageBar().pushMessage(
+            "Sucesso", "Chave OpenAI validada com sucesso.", level=0
+        )
+
+    def _on_ask_agent_clicked(self):
+        result = self.agent_controller.on_ask(
+            "Solicitar insight",
+            context={"context_version": "ctx-ui", "summary_stats": {}},
+        )
+        if result.get("code"):
+            self.iface.messageBar().pushMessage("Erro", str(result["code"]), level=2)
+            return
+
+        self.iface.messageBar().pushMessage("Sucesso", "Insight solicitado.", level=0)
+
     def run(self):
         """Run method that performs all the real work"""
 
@@ -725,6 +756,10 @@ class VectorStats:
 
             # Connect the save graph button to the save_graph function
             self.dlg.saveGraphButton.clicked.connect(self.salvar_grafico)
+
+            # Connect v2 Agent controls
+            self.dlg.apiKeySetupButton.clicked.connect(self._on_setup_api_key_clicked)
+            self.dlg.askAgentButton.clicked.connect(self._on_ask_agent_clicked)
 
         # show the dialog
         self.dlg.show()

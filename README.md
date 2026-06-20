@@ -26,6 +26,16 @@ Serie Histórica
 QGIS 3.x ou superior.
 Camadas vetoriais carregadas no projeto.
 
+## VectorStats v2 (em desenvolvimento)
+
+- Aba `Dashboard` para templates de analise guiada.
+- Aba `Agent` para insights narrativos com contexto compartilhado.
+- Politicas de privacidade, custo e retries para chamadas de IA.
+
+### Setup OpenAI
+
+Consulte `docs/v2/openai-setup.md` para configurar chave e fluxo de validacao.
+
 
 
 

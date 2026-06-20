@@ -5,12 +5,12 @@
 [general]
 name=VectorStats
 qgisMinimumVersion=3.0
-description=Plugin for descriptive and statistical analysis of vectors, with chart generation
-version=1.0
+description=Plugin for vector analytics with Dashboard and Agent insight tabs
+version=2.0
 author=Breno Nunes
 email=breno_1697@hotmail.com
 
-about=Plugin for descriptive and statistical analysis of vectors, with chart generation
+about=VectorStats v2 delivers dashboard templates and AI-assisted insights over shared analytical context.
 
 tracker=https://github.com/bsensix/VectorStats/issues
 repository=https://github.com/bsensix/VectorStats
@@ -23,7 +23,7 @@ hasProcessingProvider=no
 # changelog=
 
 # Tags are comma separated with spaces allowed
-tags=statistics
+tags=statistics, dashboard, ai, openai
 
 homepage=https://github.com/bsensix/VectorStats
 category=Plugins

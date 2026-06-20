@@ -50,7 +50,7 @@ UI_FILES = Stats_dialog_base.ui
 
 EXTRAS = metadata.txt icon.png
 
-EXTRA_DIRS =
+EXTRA_DIRS = vectorstats_v2
 
 COMPILED_RESOURCE_FILES = resources.py
 
